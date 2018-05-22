@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class DBHandler implements Configuration{
     private PreparedStatement preparedStatement;
+    private static ArrayList<Advertisement> advertisementArrayList = new ArrayList<>();
 
     private Connection getDBConnection() throws SQLException {
         String string = "jdbc:mysql://" + DBHOST + ":" + DBPORT + "/" + DBNAME + " ?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        return DriverManager.getConnection(string, DBUSER, DBPASS);
+        return DriverManager.getConnection(string, DBUSER, "12345");
     }
 
     private void closePreparedStatement(){
@@ -37,7 +38,7 @@ public class DBHandler implements Configuration{
 
     protected void updateAdvertisment(Advertisement advertisement) throws SQLException{
         String update = "UPDATE " + USER_TABLE + " SET " + NAME_OF_ADV + "=?, " + NAME_OF_PARFUME + "=?, " +
-                PRICE_OF_ADV + "=?, " + DATE_OF_ADV + "=?, " + IS_PAID + "=? WHERE" +  ID + "=?;";
+                PRICE_OF_ADV + "=?, " + DATE_OF_ADV + "=?, " + IS_PAID + "=? WHERE " +  ID + "=?;";
         preparedStatement = getDBConnection().prepareStatement(update);
         preparedStatement.setString(1, advertisement.getName_of_adv());
         preparedStatement.setString(2, advertisement.getName_of_perfume());
@@ -57,7 +58,7 @@ public class DBHandler implements Configuration{
 //        return preparedStatement.executeQuery();
 //    }
 
-    protected void deleteAdvertisment(Advertisement advertisement) throws SQLException {
+    protected void deleteAdvertisment(Advertisement advertisement) throws SQLException{
         String delete = "DELETE FROM " + USER_TABLE + " WHERE " + ID + "= ?";
         preparedStatement = getDBConnection().prepareStatement(delete);
         preparedStatement.setInt(1, advertisement.getId());
@@ -65,11 +66,10 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-    protected ArrayList<Advertisement> selectUser(Advertisement advertisement) throws SQLException {
-        ArrayList<Advertisement> advertisementArrayList = new ArrayList<>();
-        String select = "SELECT * FROM " + USER_TABLE + " WHERE " + ID + "=?";
+    protected ArrayList<Advertisement> selectAdvertisment() throws SQLException{
+
+        String select = "SELECT * FROM " + USER_TABLE;
         preparedStatement = getDBConnection().prepareStatement(select);
-        preparedStatement.setInt(1,advertisement.getId());
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
             int id = resultSet.getInt(ID);
@@ -81,5 +81,16 @@ public class DBHandler implements Configuration{
             advertisementArrayList.add(new Advertisement(name_of_adv,name_of_perfume,price_of_adv,date_of_adv,is_paid));
         }
         return advertisementArrayList;
+    }
+
+    public static void main(String[] args) {
+        try {
+            new DBHandler().selectAdvertisment();
+            for (Advertisement a: advertisementArrayList) {
+                System.out.println(a.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

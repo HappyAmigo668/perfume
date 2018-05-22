@@ -10,6 +10,15 @@ public class Advertisement {
     private Date date_of_adv;
     private boolean is_paid;
 
+    @Override
+    public String toString() {
+        return "Имя " + name_of_adv +
+                " Имя2 " + name_of_perfume +
+                " Цена " + price_of_adv +
+                " Дата " + date_of_adv +
+                " Оплачено " + is_paid;
+    }
+
     public Advertisement(int id, String name_of_adv, String name_of_perfume, float price_of_adv, Date date_of_adv, boolean is_paid) {
         this.id = id;
         this.name_of_adv = name_of_adv;
