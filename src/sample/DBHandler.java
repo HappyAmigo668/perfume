@@ -66,7 +66,7 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-    protected ArrayList<Advertisement> selectAdvertisment() throws SQLException{
+    private void selectAdvertisment() throws SQLException{
 
         String select = "SELECT * FROM " + USER_TABLE;
         preparedStatement = getDBConnection().prepareStatement(select);
@@ -80,7 +80,6 @@ public class DBHandler implements Configuration{
             boolean is_paid = resultSet.getBoolean(IS_PAID);
             advertisementArrayList.add(new Advertisement(name_of_adv,name_of_perfume,price_of_adv,date_of_adv,is_paid));
         }
-        return advertisementArrayList;
     }
 
     public static void main(String[] args) {
