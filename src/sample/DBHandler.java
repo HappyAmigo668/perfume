@@ -22,9 +22,9 @@ public class DBHandler implements Configuration{
         }
     }
 
-    protected void insertAdvertisment(Advertisement advertisement) throws SQLException{
+    public void insertAdvertisment(Advertisement advertisement) throws SQLException{
         String insert = "INSERT INTO " + USER_TABLE + "("+ NAME_OF_ADV + ", "
-                + NAME_OF_PARFUME + "," + PRICE_OF_ADV + "," + DATE_OF_ADV + "," + IS_PAID + ")"
+                + NAME_OF_PERFUME + "," + PRICE_OF_ADV + "," + DATE_OF_ADV + "," + IS_PAID + ")"
                 + "VALUES (?,?,?,?,?)";
         preparedStatement = getDBConnection().prepareStatement(insert);
         preparedStatement.setString(1, advertisement.getName_of_adv());
@@ -36,8 +36,8 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-    protected void updateAdvertisment(Advertisement advertisement) throws SQLException{
-        String update = "UPDATE " + USER_TABLE + " SET " + NAME_OF_ADV + "=?, " + NAME_OF_PARFUME + "=?, " +
+    public void updateAdvertisment(Advertisement advertisement) throws SQLException{
+        String update = "UPDATE " + USER_TABLE + " SET " + NAME_OF_ADV + "=?, " + NAME_OF_PERFUME + "=?, " +
                 PRICE_OF_ADV + "=?, " + DATE_OF_ADV + "=?, " + IS_PAID + "=? WHERE " +  ID + "=?;";
         preparedStatement = getDBConnection().prepareStatement(update);
         preparedStatement.setString(1, advertisement.getName_of_adv());
@@ -58,7 +58,7 @@ public class DBHandler implements Configuration{
 //        return preparedStatement.executeQuery();
 //    }
 
-    protected void deleteAdvertisment(Advertisement advertisement) throws SQLException{
+    public void deleteAdvertisment(Advertisement advertisement) throws SQLException{
         String delete = "DELETE FROM " + USER_TABLE + " WHERE " + ID + "= ?";
         preparedStatement = getDBConnection().prepareStatement(delete);
         preparedStatement.setInt(1, advertisement.getId());
@@ -66,20 +66,25 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-    private void selectAdvertisment() throws SQLException{
-
+    public String selectAdvertisment() throws SQLException{
+        String answer = "";
         String select = "SELECT * FROM " + USER_TABLE;
         preparedStatement = getDBConnection().prepareStatement(select);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
             int id = resultSet.getInt(ID);
             String name_of_adv = resultSet.getString(NAME_OF_ADV);
-            String name_of_perfume = resultSet.getString(NAME_OF_PARFUME);
+            String name_of_perfume = resultSet.getString(NAME_OF_PERFUME);
             float price_of_adv = resultSet.getFloat(PRICE_OF_ADV);
             Date date_of_adv = resultSet.getDate(DATE_OF_ADV);
             boolean is_paid = resultSet.getBoolean(IS_PAID);
             advertisementArrayList.add(new Advertisement(name_of_adv,name_of_perfume,price_of_adv,date_of_adv,is_paid));
         }
+        for (Advertisement a: advertisementArrayList) {
+            answer += a.toString();
+            answer += "\n-----------------------------------------------------------------------------------------------------------\n";
+        }
+        return answer;
     }
 
     public static void main(String[] args) {

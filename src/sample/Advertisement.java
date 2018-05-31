@@ -12,10 +12,11 @@ public class Advertisement {
 
     @Override
     public String toString() {
-        return "Имя " + name_of_adv +
+
+        return "Имя " + name_of_adv+
                 " Имя2 " + name_of_perfume +
-                " Цена " + price_of_adv +
-                " Дата " + date_of_adv +
+                " Цена " + price_of_adv+
+                " Дата " + date_of_adv+
                 " Оплачено " + is_paid;
     }
 
