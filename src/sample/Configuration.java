@@ -10,10 +10,10 @@ public interface Configuration {
     String DATE_OF_ADV = "date_of_adv";
     String IS_PAID = "is_paid";
 
-    String DBHOST = "localhost";
-    String DBPORT = "3306";
-    String DBUSER = "root";
-    String DBPASS = "root";
-    String DBNAME = "perfume";
+    String DB_HOST = "localhost";
+    String DB_PORT = "3306";
+    String DB_USER = "root";
+    String DB_PASSWORD = "root";
+    String DB_NAME = "perfume";
 
 }

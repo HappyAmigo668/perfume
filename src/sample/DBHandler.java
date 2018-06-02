@@ -5,11 +5,10 @@ import java.util.ArrayList;
 
 public class DBHandler implements Configuration{
     private PreparedStatement preparedStatement;
-    private static ArrayList<Advertisement> advertisementArrayList = new ArrayList<>();
-
+    private ArrayList<Advertisement> advertisements = new ArrayList<>();
     private Connection getDBConnection() throws SQLException {
-        String string = "jdbc:mysql://" + DBHOST + ":" + DBPORT + "/" + DBNAME + " ?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        return DriverManager.getConnection(string, DBUSER, "12345");
+        String string = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + " ?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        return DriverManager.getConnection(string, DB_USER, "12345");
     }
 
     private void closePreparedStatement(){
@@ -22,7 +21,7 @@ public class DBHandler implements Configuration{
         }
     }
 
-    public void insertAdvertisment(Advertisement advertisement) throws SQLException{
+    public void insertAdvertisement(Advertisement advertisement) throws SQLException{
         String insert = "INSERT INTO " + USER_TABLE + "("+ NAME_OF_ADV + ", "
                 + NAME_OF_PERFUME + "," + PRICE_OF_ADV + "," + DATE_OF_ADV + "," + IS_PAID + ")"
                 + "VALUES (?,?,?,?,?)";
@@ -36,7 +35,7 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-    public void updateAdvertisment(Advertisement advertisement) throws SQLException{
+    public void updateAdvertisement(Advertisement advertisement) throws SQLException{
         String update = "UPDATE " + USER_TABLE + " SET " + NAME_OF_ADV + "=?, " + NAME_OF_PERFUME + "=?, " +
                 PRICE_OF_ADV + "=?, " + DATE_OF_ADV + "=?, " + IS_PAID + "=? WHERE " +  ID + "=?;";
         preparedStatement = getDBConnection().prepareStatement(update);
@@ -50,15 +49,7 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-//    protected ResultSet selectAdvertisment(Advertisement advertisement) throws SQLException {
-//        String select = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_USERNAME
-//                + "=?";
-//        preparedStatement = getDBConnection().prepareStatement(select);
-//        preparedStatement.setInt(1, advertisement.getId());
-//        return preparedStatement.executeQuery();
-//    }
-
-    public void deleteAdvertisment(Advertisement advertisement) throws SQLException{
+    public void deleteAdvertisement(Advertisement advertisement) throws SQLException{
         String delete = "DELETE FROM " + USER_TABLE + " WHERE " + ID + "= ?";
         preparedStatement = getDBConnection().prepareStatement(delete);
         preparedStatement.setInt(1, advertisement.getId());
@@ -66,8 +57,8 @@ public class DBHandler implements Configuration{
         closePreparedStatement();
     }
 
-    public String selectAdvertisment() throws SQLException{
-        String answer = "";
+    public String selectAdvertisement() throws SQLException{
+        StringBuilder answer = new StringBuilder();
         String select = "SELECT * FROM " + USER_TABLE;
         preparedStatement = getDBConnection().prepareStatement(select);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -76,25 +67,18 @@ public class DBHandler implements Configuration{
             String name_of_adv = resultSet.getString(NAME_OF_ADV);
             String name_of_perfume = resultSet.getString(NAME_OF_PERFUME);
             float price_of_adv = resultSet.getFloat(PRICE_OF_ADV);
-            Date date_of_adv = resultSet.getDate(DATE_OF_ADV);
+            java.sql.Date date_of_adv = resultSet.getDate(DATE_OF_ADV);
             boolean is_paid = resultSet.getBoolean(IS_PAID);
-            advertisementArrayList.add(new Advertisement(name_of_adv,name_of_perfume,price_of_adv,date_of_adv,is_paid));
+            advertisements.add(new Advertisement(id,name_of_adv,name_of_perfume,price_of_adv,date_of_adv,is_paid));
         }
-        for (Advertisement a: advertisementArrayList) {
-            answer += a.toString();
-            answer += "\n-----------------------------------------------------------------------------------------------------------\n";
-        }
-        return answer;
-    }
-
-    public static void main(String[] args) {
-        try {
-            new DBHandler().selectAdvertisment();
-            for (Advertisement a: advertisementArrayList) {
-                System.out.println(a.toString());
+        for (int i = 1; i < advertisements.size(); i++){
+            if (advertisements.get(i).getId()==advertisements.get(i-1).getId()){
+                advertisements.remove(i);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        for (Advertisement a: advertisements){
+            answer.append(a.toString()).append("\n");
+        }
+        return answer.toString();
     }
 }

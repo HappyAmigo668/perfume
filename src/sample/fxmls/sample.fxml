@@ -8,12 +8,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #2e3348;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.Controller">
    <children>
-      <Button fx:id="btnEdit" layoutX="636.0" layoutY="383.0" mnemonicParsing="false" onAction="#actionEdit" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #f39c63;" text="Редактировать" textFill="WHITE" AnchorPane.bottomAnchor="87.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnEdit" layoutX="580.0" layoutY="320.0" mnemonicParsing="false" onAction="#actionEdit" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #f39c63;" text="Редактировать" textFill="WHITE" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -21,7 +23,7 @@
             <DropShadow color="#00000080" offsetX="2.0" offsetY="2.0" />
          </effect>
       </Button>
-      <Button fx:id="btnAdd" layoutX="636.0" layoutY="248.0" mnemonicParsing="false" onAction="#actionAdd" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #f39c63;" text="Добавить" textFill="WHITE" AnchorPane.bottomAnchor="222.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnAdd" layoutX="580.0" layoutY="275.0" mnemonicParsing="false" onAction="#actionAdd" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #f39c63;" text="Добавить" textFill="WHITE" AnchorPane.bottomAnchor="195.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -29,7 +31,7 @@
             <DropShadow color="#00000080" offsetX="2.0" offsetY="2.0" />
          </effect>
       </Button>
-      <Button fx:id="btnDelete" layoutX="636.0" layoutY="343.0" mnemonicParsing="false" onAction="#actionDelete" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #f39c63;" text="Удалить" textFill="WHITE" AnchorPane.bottomAnchor="127.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnDelete" layoutX="580.0" layoutY="405.0" mnemonicParsing="false" onAction="#actionDelete" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #f39c63;" text="Удалить" textFill="WHITE" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -37,23 +39,22 @@
             <DropShadow color="#00000080" offsetX="2.0" offsetY="2.0" />
          </effect>
       </Button>
-      <ComboBox fx:id="choiceNameAdv" layoutX="636.0" layoutY="86.0" prefWidth="150.0" promptText="Тип рекламы:">
+      <ComboBox fx:id="choiceNameAdv" layoutX="580.0" layoutY="115.0" prefWidth="200.0" promptText="Тип рекламы:">
          <effect>
             <DropShadow color="#00000080" />
          </effect>
       </ComboBox>
-      <TextField fx:id="textPrice" layoutX="637.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0" promptText="Стоимость рекламы:">
+      <TextField fx:id="textPrice" layoutX="580.0" layoutY="155.0" prefHeight="25.0" prefWidth="200.0" promptText="Стоимость рекламы:">
          <effect>
             <DropShadow color="#00000080" />
          </effect>
       </TextField>
-      <DatePicker fx:id="date" layoutX="636.0" layoutY="165.0" prefHeight="25.0" prefWidth="150.0" promptText="Дата запуска:" />
-      <CheckBox fx:id="checkPaid" layoutX="637.0" layoutY="206.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="150.0" text="Оплачено" textFill="WHITE">
+      <CheckBox fx:id="checkPaid" layoutX="580.0" layoutY="235.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Оплачено" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </CheckBox>
-      <Button fx:id="btnShowAll" layoutX="636.0" layoutY="446.0" mnemonicParsing="false" onAction="#actionShowAll" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #f39c63;" text="Показать все" textFill="WHITE">
+      <Button fx:id="btnShowAll" layoutX="580.0" layoutY="450.0" mnemonicParsing="false" onAction="#actionShowAll" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #f39c63;" text="Показать все" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -61,20 +62,39 @@
             <DropShadow color="#00000080" offsetX="2.0" offsetY="2.0" />
          </effect>
       </Button>
-      <TextField fx:id="textNamePerfume" layoutX="635.0" layoutY="47.0" prefHeight="25.0" prefWidth="150.0" promptText="Название парфюма:">
+      <TextField fx:id="textNamePerfume" layoutX="580.0" layoutY="75.0" prefHeight="25.0" prefWidth="200.0" promptText="Название парфюма:">
          <effect>
             <DropShadow color="#00000080" />
          </effect>
       </TextField>
-      <TextField fx:id="textId1" layoutX="636.0" layoutY="302.0" prefHeight="25.0" prefWidth="150.0" promptText="id">
+      <TextField fx:id="textId" layoutX="580.0" layoutY="365.0" prefHeight="25.0" prefWidth="200.0" promptText="id:">
          <effect>
             <DropShadow color="#00000080" />
          </effect>
       </TextField>
-      <Label fx:id="labelAll" alignment="TOP_LEFT" prefHeight="500.0" prefWidth="600.0" style="-fx-border-color: cccccc; -fx-border-radius: 5;" textFill="WHITE">
+      <Label fx:id="labelAll" alignment="TOP_LEFT" prefHeight="500.0" prefWidth="555.0" textFill="WHITE">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Label>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="580.0" layoutY="9.0">
+         <image>
+            <Image url="@../Images/perfume.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="653.0" layoutY="9.0">
+         <image>
+            <Image url="@../Images/perfume2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="727.0" layoutY="9.0">
+         <image>
+            <Image url="@../Images/perfume3.png" />
+         </image>
+      </ImageView>
+      <DatePicker fx:id="datePicker" layoutX="580.0" layoutY="192.0" prefHeight="25.0" prefWidth="200.0" promptText="Дата запуска:" />
    </children>
 </AnchorPane>
