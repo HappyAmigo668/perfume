@@ -1,5 +1,8 @@
 package sample;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,7 +64,7 @@ public class DBHandler implements Configuration{
     }
 
     public String selectAdvertisement() throws SQLException{
-        StringBuilder answer = new StringBuilder();
+        String answer = "";
         String select = "SELECT * FROM " + USER_TABLE;
         preparedStatement = getDBConnection().prepareStatement(select);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -81,9 +84,14 @@ public class DBHandler implements Configuration{
         }
         advertisements.sort(Comparator.comparing(Advertisement::getName_of_adv));
         for (Advertisement a: advertisements){
-            answer.append(a.toString()).append("\n");
+            answer += a.toString() + "\n";
         }
-        return answer.toString();
+        try {
+            saveIntoFile(answer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return answer;
     }
     public String selectAdvertisementByName(Advertisement advertisement) throws SQLException{
         StringBuilder answer = new StringBuilder();
@@ -110,5 +118,10 @@ public class DBHandler implements Configuration{
             answer.append(a.toString()).append("\n");
         }
         return answer.toString();
+    }
+    private void saveIntoFile(String string) throws IOException {
+        FileWriter fileWriter = new FileWriter(new File("perfume.txt"),false);
+        fileWriter.write(string);
+        fileWriter.close();
     }
 }
