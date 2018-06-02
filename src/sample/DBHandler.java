@@ -2,10 +2,13 @@ package sample;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DBHandler implements Configuration{
     private PreparedStatement preparedStatement;
     private ArrayList<Advertisement> advertisements = new ArrayList<>();
+    private ArrayList<Advertisement> selectedAdvertisements = new ArrayList<>();
     private Connection getDBConnection() throws SQLException {
         String string = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + " ?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         return DriverManager.getConnection(string, DB_USER, "12345");
@@ -76,7 +79,34 @@ public class DBHandler implements Configuration{
                 advertisements.remove(i);
             }
         }
+        advertisements.sort(Comparator.comparing(Advertisement::getName_of_adv));
         for (Advertisement a: advertisements){
+            answer.append(a.toString()).append("\n");
+        }
+        return answer.toString();
+    }
+    public String selectAdvertisementByName(Advertisement advertisement) throws SQLException{
+        StringBuilder answer = new StringBuilder();
+        String select = "SELECT * FROM " + USER_TABLE + " WHERE " + NAME_OF_PERFUME + "=?;";
+        preparedStatement = getDBConnection().prepareStatement(select);
+        preparedStatement.setString(1, advertisement.getName_of_perfume());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            int id = resultSet.getInt(ID);
+            String name_of_adv = resultSet.getString(NAME_OF_ADV);
+            String name_of_perfume = resultSet.getString(NAME_OF_PERFUME);
+            float price_of_adv = resultSet.getFloat(PRICE_OF_ADV);
+            java.sql.Date date_of_adv = resultSet.getDate(DATE_OF_ADV);
+            boolean is_paid = resultSet.getBoolean(IS_PAID);
+            selectedAdvertisements.add(new Advertisement(id,name_of_adv,name_of_perfume,price_of_adv,date_of_adv,is_paid));
+        }
+        for (int i = 1; i < selectedAdvertisements.size(); i++){
+            if (selectedAdvertisements.get(i).getId()==selectedAdvertisements.get(i-1).getId()){
+                selectedAdvertisements.remove(i);
+            }
+        }
+        selectedAdvertisements.sort(Comparator.comparing(Advertisement::getName_of_adv));
+        for (Advertisement a: selectedAdvertisements){
             answer.append(a.toString()).append("\n");
         }
         return answer.toString();

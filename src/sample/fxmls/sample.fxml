@@ -54,7 +54,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </CheckBox>
-      <Button fx:id="btnShowAll" layoutX="580.0" layoutY="450.0" mnemonicParsing="false" onAction="#actionShowAll" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #f39c63;" text="Показать все" textFill="WHITE">
+      <Button fx:id="btnShow" layoutX="580.0" layoutY="450.0" mnemonicParsing="false" onAction="#actionShow" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #f39c63;" text="Поиск по названию" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -95,6 +95,6 @@
             <Image url="@../Images/perfume3.png" />
          </image>
       </ImageView>
-      <DatePicker fx:id="datePicker" layoutX="580.0" layoutY="192.0" prefHeight="25.0" prefWidth="200.0" promptText="Дата запуска:" />
+      <DatePicker fx:id="datePicker" editable="false" layoutX="580.0" layoutY="192.0" prefHeight="25.0" prefWidth="200.0" promptText="Дата запуска:" />
    </children>
 </AnchorPane>

@@ -1,8 +1,8 @@
 package sample.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import sample.Advertisement;
 import sample.Animation;
 import sample.DBHandler;
@@ -26,6 +26,7 @@ public class Controller{
         String [] array = {"Телевизионная реклама","Радио реклама", "Печатная реклама", "Интернет-реклама"};
         choiceNameAdv.getItems().addAll(array);
         choiceNameAdv.getSelectionModel().selectFirst();
+        actionShowAll();
     }
 
     public void actionAdd() {
@@ -77,7 +78,7 @@ public class Controller{
             actionShowAll();
         }
     }
-    public void actionShowAll() {
+    private void actionShowAll() {
         try {
             labelAll.setText(new DBHandler().selectAdvertisement());
         } catch (SQLException e) {
@@ -104,5 +105,21 @@ public class Controller{
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date parsed = format.parse(string);
         return new Date(parsed.getTime());
+    }
+
+    public void actionShow() {
+        try {
+            String name_of_perfume = textNamePerfume.getText();
+            if (name_of_perfume.trim().length()==0){
+                throw new NullPointerException();
+            }
+            Advertisement advertisement = new Advertisement();
+            advertisement.setName_of_perfume(name_of_perfume);
+            labelAll.setText(new DBHandler().selectAdvertisementByName(advertisement));
+        } catch (NullPointerException e){
+            Animation.animateNode(textNamePerfume);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

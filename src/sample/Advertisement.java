@@ -10,6 +10,10 @@ public class Advertisement {
     private Date date_of_adv;
     private boolean is_paid;
 
+    public void setName_of_perfume(String name_of_perfume) {
+        this.name_of_perfume = name_of_perfume;
+    }
+
     @Override
     public String toString() {
         return id +
