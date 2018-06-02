@@ -2,6 +2,7 @@ package sample.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import sample.Advertisement;
 import sample.Animation;
 import sample.DBHandler;
@@ -19,6 +20,7 @@ public class Controller{
     public CheckBox checkPaid;
     public TextField textId;
     public Label labelAll;
+
     @FXML
     protected void initialize(){
         String [] array = {"Телевизионная реклама","Радио реклама", "Печатная реклама", "Интернет-реклама"};
