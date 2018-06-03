@@ -13,7 +13,7 @@ public class DBHandler implements Configuration{
     private ArrayList<Advertisement> selectedAdvertisements = new ArrayList<>();
     private Connection getDBConnection() throws SQLException {
         String string = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + " ?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        return DriverManager.getConnection(string, DB_USER, "12345");
+        return DriverManager.getConnection(string, Main.CONNECTION_USER, Main.CONNECTION_PASSWORD);
     }
 
     private void closePreparedStatement(){

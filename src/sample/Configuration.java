@@ -12,8 +12,6 @@ public interface Configuration {
 
     String DB_HOST = "localhost";
     String DB_PORT = "3306";
-    String DB_USER = "root";
-    String DB_PASSWORD = "root";
     String DB_NAME = "perfume";
 
 }

@@ -28,7 +28,6 @@ public class Controller{
         choiceNameAdv.getSelectionModel().selectFirst();
         actionShowAll();
     }
-
     public void actionAdd() {
         try {
             String name_of_adv = String.valueOf(choiceNameAdv.getValue());
@@ -86,7 +85,8 @@ public class Controller{
         }
         textNamePerfume.setText("");
         textId.setText("");
-        textId.setText("");
+        textPrice.setText("");
+        textSearchByName.setText("");
     }
     public void actionDelete() {
         try{

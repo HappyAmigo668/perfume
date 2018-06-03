@@ -17,8 +17,8 @@ public class Advertisement {
     @Override
     public String toString() {
         return id +
-                " |\t" + name_of_adv+
-                ",   " + name_of_perfume +
+                " |\t" + name_of_perfume +
+                ",   " + name_of_adv +
                 ",   " + price_of_adv+
                 "$,  " + date_of_adv+
                 ",  " + (is_paid ? "Оплачено.":"Неоплачено.");
