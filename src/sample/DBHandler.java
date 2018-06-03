@@ -63,7 +63,7 @@ public class DBHandler implements Configuration{
     }
 
     public String selectAdvertisement() throws SQLException{
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
         String select = "SELECT * FROM " + USER_TABLE;
         preparedStatement = getDBConnection().prepareStatement(select);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -83,14 +83,14 @@ public class DBHandler implements Configuration{
         }
         advertisements.sort(Comparator.comparing(Advertisement::getName_of_adv));
         for (Advertisement a: advertisements){
-            answer += a.toString() + "\n";
+            answer.append(a.toString()).append("\n");
         }
         try {
-            saveIntoFile(answer);
+            saveIntoFile(answer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return answer;
+        return answer.toString();
     }
     public String selectAdvertisementByName(Advertisement advertisement) throws SQLException{
         StringBuilder answer = new StringBuilder();
@@ -115,6 +115,9 @@ public class DBHandler implements Configuration{
         selectedAdvertisements.sort(Comparator.comparing(Advertisement::getName_of_adv));
         for (Advertisement a: selectedAdvertisements){
             answer.append(a.toString()).append("\n");
+        }
+        if (answer.toString().equals("")){
+            throw new SQLException();
         }
         return answer.toString();
     }

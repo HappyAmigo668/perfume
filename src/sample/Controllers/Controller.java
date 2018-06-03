@@ -19,6 +19,7 @@ public class Controller{
     public CheckBox checkPaid;
     public TextField textId;
     public Label labelAll;
+    public TextField textSearchByName;
 
     @FXML
     protected void initialize(){
@@ -83,8 +84,10 @@ public class Controller{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        textNamePerfume.setText("");
+        textId.setText("");
+        textId.setText("");
     }
-
     public void actionDelete() {
         try{
             int id = Integer.parseInt(textId.getText());
@@ -100,25 +103,25 @@ public class Controller{
             actionShowAll();
         }
     }
+    public void actionShowByName() {
+        String name_of_perfume = textSearchByName.getText();
+        if (name_of_perfume.trim().length()==0){
+            actionShowAll();
+        }
+        else {
+            Advertisement advertisement = new Advertisement();
+            advertisement.setName_of_perfume(name_of_perfume);
+            try {
+                String answer = new DBHandler().selectAdvertisementByName(advertisement);
+                labelAll.setText(answer);
+            } catch (SQLException e) {
+                labelAll.setText(name_of_perfume);
+            }
+        }
+    }
     private Date createDate(String string) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date parsed = format.parse(string);
         return new Date(parsed.getTime());
-    }
-
-    public void actionShow() {
-        try {
-            String name_of_perfume = textNamePerfume.getText();
-            if (name_of_perfume.trim().length()==0){
-                throw new NullPointerException();
-            }
-            Advertisement advertisement = new Advertisement();
-            advertisement.setName_of_perfume(name_of_perfume);
-            labelAll.setText(new DBHandler().selectAdvertisementByName(advertisement));
-        } catch (NullPointerException e){
-            Animation.animateNode(textNamePerfume);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
