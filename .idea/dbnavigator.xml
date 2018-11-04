@@ -26,15 +26,15 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="791c8f82-b0f2-452f-8775-28e2bb8735c8">
+    <connection id="8f9c98df-79cd-4fe2-84ad-cf7ced829c35">
       <console name="Connection" type="STANDARD" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="791c8f82-b0f2-452f-8775-28e2bb8735c8" />
+    <connection id="8f9c98df-79cd-4fe2-84ad-cf7ced829c35" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-list connection-id="791c8f82-b0f2-452f-8775-28e2bb8735c8" dataset="perfume.costs" active-filter-id="EMPTY_FILTER" />
+    <filter-list connection-id="8f9c98df-79cd-4fe2-84ad-cf7ced829c35" dataset="perfume.costs" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -59,7 +59,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="791c8f82-b0f2-452f-8775-28e2bb8735c8" active="true">
+      <connection id="8f9c98df-79cd-4fe2-84ad-cf7ced829c35" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -76,7 +76,7 @@
           <os-authentication value="false" />
           <empty-password value="false" />
           <user value="root" />
-          <password value="MTIzNDU=" />
+          <password value="cm9vdA==" />
         </database>
         <properties>
           <auto-commit value="false" />
@@ -101,7 +101,6 @@
           <restore-workspace-deep value="true" />
           <environment-type value="default" />
           <idle-time-to-disconnect value="30" />
-          <idle-time-to-disconnect-pool value="5" />
           <password-expiry-time value="10" />
           <max-connection-pool-size value="7" />
           <alternative-statement-delimiter value="" />
